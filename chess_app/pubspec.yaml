@@ -1,0 +1,26 @@
+name: chess_app
+description: Application d'échecs avec tutoriels, niveaux et jeu
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  chess: ^0.8.1          # Logique complète des échecs (règles, validation, mat)
+  shared_preferences: ^2.2.2  # Sauvegarde locale de la progression
+  provider: ^6.1.1        # Gestion d'état de l'application
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/chessclub.png
+    - assets/images/king.png
+    - assets/images/kin.png
