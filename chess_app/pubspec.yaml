@@ -9,18 +9,40 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  chess: ^0.8.1          # Logique complète des échecs (règles, validation, mat)
-  shared_preferences: ^2.2.2  # Sauvegarde locale de la progression
-  provider: ^6.1.1        # Gestion d'état de l'application
+
+  # Logique des échecs
+  chess: ^0.8.1
+
+  # Gestion d'état — Riverpod
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # Firebase
+  firebase_core: ^2.27.0
+  firebase_auth: ^4.17.0
+  cloud_firestore: ^4.15.0
+
+  # Navigation
+  go_router: ^13.2.0
+
+  # Text to speech
+  flutter_tts: ^4.0.2
+
+  # Cache local
+  shared_preferences: ^2.2.2
+
+  # Utilitaires
+  equatable: ^2.0.5
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  build_runner: ^2.4.9
+  riverpod_generator: ^2.3.11
 
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/chessclub.png
-    - assets/images/king.png
-    - assets/images/kin.png
+    - assets/images/chess_club.png

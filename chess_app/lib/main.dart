@@ -1,10 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'screens/splash_screen.dart';
-import 'services/game_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'core/constants/app_colors.dart';
+import 'presentation/screens/auth/splash_screen.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(const ChessApp());
+void main() async {
+  // Obligatoire avant tout appel asynchrone dans main()
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialisation Firebase — doit être fait avant runApp()
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
+
+  // ProviderScope est le widget racine de Riverpod
+  // Il permet à tous les providers d'être accessibles partout
+  runApp(const ProviderScope(child: ChessApp()));
 }
 
 class ChessApp extends StatelessWidget {
@@ -12,22 +24,20 @@ class ChessApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => GameProvider(),
-      child: MaterialApp(
-        title: 'ChessApp',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xFF2D1B69),
-            primary: const Color(0xFF2D1B69),
-            secondary: const Color(0xFFC9A84C),
-          ),
-          useMaterial3: true,
-          fontFamily: 'Arial',
+    return MaterialApp(
+      title: 'ChessApp',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppColors.primary,
+          primary: AppColors.primary,
+          secondary: AppColors.accent,
+          surface: AppColors.surface,
         ),
-        home: const SplashScreen(),
+        scaffoldBackgroundColor: AppColors.background,
+        useMaterial3: true,
       ),
+      home: const SplashScreen(),
     );
   }
 }
