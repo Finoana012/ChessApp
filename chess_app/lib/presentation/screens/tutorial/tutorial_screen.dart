@@ -59,7 +59,7 @@ final List<TutorialLesson> lessons = [
             '\n\nIl se déplace d\'une seule case dans toutes les directions.'
             '\n\nSi votre Roi est capturé, vous perdez la partie !',
         fen: '8/8/8/8/4K3/8/8/8 w - - 0 1',
-        highlightSquares: ['d3','d4','d5','e3','e5','f3','f4','f5'],
+        highlightSquares: ['d3', 'd4', 'd5', 'e3', 'e5', 'f3', 'f4', 'f5'],
       ),
       TutorialStep(
         emoji: '♕',
@@ -69,10 +69,33 @@ final List<TutorialLesson> lessons = [
             '\n\nProtégez-la, sa perte est souvent fatale !',
         fen: '8/8/8/8/4Q3/8/8/8 w - - 0 1',
         highlightSquares: [
-          'e1','e2','e3','e5','e6','e7','e8',
-          'a4','b4','c4','d4','f4','g4','h4',
-          'a8','b7','c6','d5','f3','g2','h1',
-          'h7','g6','f5','d3','c2','b1',
+          'e1',
+          'e2',
+          'e3',
+          'e5',
+          'e6',
+          'e7',
+          'e8',
+          'a4',
+          'b4',
+          'c4',
+          'd4',
+          'f4',
+          'g4',
+          'h4',
+          'a8',
+          'b7',
+          'c6',
+          'd5',
+          'f3',
+          'g2',
+          'h1',
+          'h7',
+          'g6',
+          'f5',
+          'd3',
+          'c2',
+          'b1',
         ],
       ),
       TutorialStep(
@@ -83,8 +106,20 @@ final List<TutorialLesson> lessons = [
             '\n\nTrès puissante en fin de partie !',
         fen: '8/8/8/8/4R3/8/8/8 w - - 0 1',
         highlightSquares: [
-          'e1','e2','e3','e5','e6','e7','e8',
-          'a4','b4','c4','d4','f4','g4','h4',
+          'e1',
+          'e2',
+          'e3',
+          'e5',
+          'e6',
+          'e7',
+          'e8',
+          'a4',
+          'b4',
+          'c4',
+          'd4',
+          'f4',
+          'g4',
+          'h4',
         ],
       ),
       TutorialStep(
@@ -95,18 +130,30 @@ final List<TutorialLesson> lessons = [
             '\n\nIl reste toujours sur la même couleur !',
         fen: '8/8/8/8/4B3/8/8/8 w - - 0 1',
         highlightSquares: [
-          'a8','b7','c6','d5','f3','g2','h1',
-          'h7','g6','f5','d3','c2','b1',
+          'a8',
+          'b7',
+          'c6',
+          'd5',
+          'f3',
+          'g2',
+          'h1',
+          'h7',
+          'g6',
+          'f5',
+          'd3',
+          'c2',
+          'b1',
         ],
       ),
       TutorialStep(
         emoji: '♘',
         title: 'Le Cavalier',
-        content: 'Le Cavalier est la seule pièce qui saute par-dessus les autres !'
+        content:
+            'Le Cavalier est la seule pièce qui saute par-dessus les autres !'
             '\n\nIl se déplace en L : 2 cases puis 1 case perpendiculaire.'
             '\n\nCette particularité le rend très imprévisible.',
         fen: '8/8/8/8/4N3/8/8/8 w - - 0 1',
-        highlightSquares: ['d2','f2','c3','g3','c5','g5','d6','f6'],
+        highlightSquares: ['d2', 'f2', 'c3', 'g3', 'c5', 'g5', 'd6', 'f6'],
       ),
       TutorialStep(
         emoji: '♙',
@@ -115,11 +162,10 @@ final List<TutorialLesson> lessons = [
             '\n\nAu premier coup il peut avancer de 2 cases, et il capture en diagonale.'
             '\n\nS\'il atteint la dernière rangée, il devient une Dame !',
         fen: '8/8/8/8/8/8/4P3/8 w - - 0 1',
-        highlightSquares: ['e3','e4','d3','f3'],
+        highlightSquares: ['e3', 'e4', 'd3', 'f3'],
       ),
     ],
   ),
-
   TutorialLesson(
     id: 'lesson_2',
     title: 'Règles spéciales',
@@ -134,53 +180,57 @@ final List<TutorialLesson> lessons = [
             '\n\nPetit roque côté Roi : le Roi va en g1 et la Tour vient en f1.'
             '\n\nConditions : ni le Roi ni la Tour n\'ont bougé, aucune pièce entre eux.',
         fen: 'r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1',
-        highlightSquares: ['e1','h1','f1','g1'],
+        highlightSquares: ['e1', 'h1', 'f1', 'g1'],
       ),
       TutorialStep(
         emoji: '🏯',
         title: 'Le grand roque',
-        content: 'Grand roque côté Dame : le Roi va en c1 et la Tour vient en d1.'
+        content:
+            'Grand roque côté Dame : le Roi va en c1 et la Tour vient en d1.'
             '\n\nLe Roi ne doit pas traverser une case attaquée.'
             '\n\nLe Roi ne doit pas être en échec au moment de roquer.',
         fen: 'r3k2r/8/8/8/8/8/8/R3K2R w KQkq - 0 1',
-        highlightSquares: ['e1','a1','d1','c1'],
+        highlightSquares: ['e1', 'a1', 'd1', 'c1'],
       ),
       TutorialStep(
         emoji: '⚡',
         title: 'La prise en passant',
-        content: 'Si un pion adverse avance de 2 cases et se retrouve à côté de votre pion, vous pouvez le capturer en passant.'
+        content:
+            'Si un pion adverse avance de 2 cases et se retrouve à côté de votre pion, vous pouvez le capturer en passant.'
             '\n\nCe coup n\'est possible qu\'immédiatement après le double avancement adverse.',
         fen: '8/8/8/3pP3/8/8/8/8 w - d6 0 1',
-        highlightSquares: ['e5','d5','d6'],
+        highlightSquares: ['e5', 'd5', 'd6'],
       ),
       TutorialStep(
         emoji: '👑',
         title: 'La promotion',
-        content: 'Quand un pion atteint la dernière rangée, il se transforme en une autre pièce.'
+        content:
+            'Quand un pion atteint la dernière rangée, il se transforme en une autre pièce.'
             '\n\nOn choisit presque toujours la Dame car c\'est la plus puissante !'
             '\n\nUn pion qui promeut peut changer le résultat d\'une partie perdue.',
         fen: '8/4P3/8/8/8/8/8/8 w - - 0 1',
-        highlightSquares: ['e7','e8'],
+        highlightSquares: ['e7', 'e8'],
       ),
       TutorialStep(
         emoji: '⚠️',
         title: 'L\'échec',
-        content: 'Le Roi est en ÉCHEC quand il est attaqué par une pièce adverse.'
+        content:
+            'Le Roi est en ÉCHEC quand il est attaqué par une pièce adverse.'
             '\n\nVous devez OBLIGATOIREMENT sortir de l\'échec en déplaçant le Roi, capturant la pièce attaquante ou bloquant l\'attaque.',
         fen: '4q3/8/8/8/8/8/8/4K3 w - - 0 1',
-        highlightSquares: ['e1','e8','e2','e3','e4','e5','e6','e7'],
+        highlightSquares: ['e1', 'e8', 'e2', 'e3', 'e4', 'e5', 'e6', 'e7'],
       ),
       TutorialStep(
         emoji: '🏁',
         title: 'Échec et mat',
-        content: 'L\'ÉCHEC ET MAT se produit quand le Roi est en échec et qu\'aucune échappatoire n\'est possible.'
+        content:
+            'L\'ÉCHEC ET MAT se produit quand le Roi est en échec et qu\'aucune échappatoire n\'est possible.'
             '\n\nC\'est la fin de la partie ! Exemple classique : le mat du couloir où la Tour cloue le Roi sur la dernière rangée.',
         fen: 'R6k/8/8/8/8/8/8/7K b - - 0 1',
-        highlightSquares: ['h8','a8','g8','g7','h7'],
+        highlightSquares: ['h8', 'a8', 'g8', 'g7', 'h7'],
       ),
     ],
   ),
-
   TutorialLesson(
     id: 'lesson_3',
     title: 'Stratégie',
@@ -191,11 +241,12 @@ final List<TutorialLesson> lessons = [
       TutorialStep(
         emoji: '🎯',
         title: 'Contrôlez le centre',
-        content: 'Les 4 cases centrales d4, d5, e4, e5 sont les plus importantes du plateau.'
+        content:
+            'Les 4 cases centrales d4, d5, e4, e5 sont les plus importantes du plateau.'
             '\n\nUne pièce au centre contrôle plus de cases et est plus mobile.'
             '\n\nCommencez toujours par e4 ou d4 !',
         fen: 'rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2',
-        highlightSquares: ['d4','d5','e4','e5'],
+        highlightSquares: ['d4', 'd5', 'e4', 'e5'],
       ),
       TutorialStep(
         emoji: '🚀',
@@ -203,17 +254,20 @@ final List<TutorialLesson> lessons = [
         content: 'Sortez rapidement vos Cavaliers et Fous dès le début.'
             '\n\nRègle simple : ne bougez pas deux fois la même pièce en ouverture.'
             '\n\nChaque coup doit développer une nouvelle pièce !',
-        fen: 'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1',
-        highlightSquares: ['c4','f3','c6'],
+        fen:
+            'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 0 1',
+        highlightSquares: ['c4', 'f3', 'c6'],
       ),
       TutorialStep(
         emoji: '🛡️',
         title: 'Roquez tôt',
-        content: 'Roquez avant le milieu de partie pour mettre votre Roi en sécurité.'
+        content:
+            'Roquez avant le milieu de partie pour mettre votre Roi en sécurité.'
             '\n\nUn Roi au centre du plateau est très vulnérable aux attaques !'
             '\n\nLe roque met aussi votre Tour en jeu, double bénéfice.',
-        fen: 'r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 0 1',
-        highlightSquares: ['e1','g1','h1','f1'],
+        fen:
+            'r1bqk2r/pppp1ppp/2n2n2/2b1p3/2B1P3/2N2N2/PPPP1PPP/R1BQK2R w KQkq - 0 1',
+        highlightSquares: ['e1', 'g1', 'h1', 'f1'],
       ),
       TutorialStep(
         emoji: '💎',
@@ -227,10 +281,11 @@ final List<TutorialLesson> lessons = [
       TutorialStep(
         emoji: '🔗',
         title: 'Connectez vos Tours',
-        content: 'Quand toutes vos pièces sont développées et votre Roi est en sécurité, connectez vos deux Tours.'
+        content:
+            'Quand toutes vos pièces sont développées et votre Roi est en sécurité, connectez vos deux Tours.'
             '\n\nDeux Tours sur la même rangée se protègent et contrôlent une colonne entière.',
         fen: '3rr1k1/8/8/8/8/8/8/3RR1K1 w - - 0 1',
-        highlightSquares: ['d1','e1','d8','e8'],
+        highlightSquares: ['d1', 'e1', 'd8', 'e8'],
       ),
     ],
   ),
@@ -255,8 +310,7 @@ class TutorialScreen extends ConsumerWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text('Tutoriels',
-            style: TextStyle(
-                color: Colors.white, fontWeight: FontWeight.w700)),
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700)),
         centerTitle: true,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(3),
@@ -268,8 +322,8 @@ class TutorialScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildProgressHeader(completed.length),
-            const SizedBox(height: 28),
+            // _buildProgressHeader(completed.length),
+            // const SizedBox(height: 28),
             const Text(
               'Choisissez une leçon',
               style: TextStyle(
@@ -289,12 +343,10 @@ class TutorialScreen extends ConsumerWidget {
                 onTap: () => Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (_, __, ___) =>
-                        LessonScreen(lesson: lesson),
+                    pageBuilder: (_, __, ___) => LessonScreen(lesson: lesson),
                     transitionsBuilder: (_, anim, __, child) =>
                         FadeTransition(opacity: anim, child: child),
-                    transitionDuration:
-                        const Duration(milliseconds: 400),
+                    transitionDuration: const Duration(milliseconds: 400),
                   ),
                 ),
               );
@@ -305,76 +357,74 @@ class TutorialScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildProgressHeader(int completedCount) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [AppColors.primary, AppColors.primaryDark],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primary.withOpacity(0.35),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(14),
-            decoration: BoxDecoration(
-              color: AppColors.accent.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: const Text('🎓',
-                style: TextStyle(fontSize: 28)),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text('Progression des leçons',
-                    style: TextStyle(
-                        color: Colors.white70, fontSize: 12)),
-                const SizedBox(height: 4),
-                Text(
-                  '$completedCount / ${lessons.length} leçons complétées',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: LinearProgressIndicator(
-                    value: lessons.isEmpty
-                        ? 0
-                        : completedCount / lessons.length,
-                    backgroundColor: Colors.white.withOpacity(0.2),
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        AppColors.accent),
-                    minHeight: 7,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+//   Widget _buildProgressHeader(int completedCount) {
+//     return Container(
+//       width: double.infinity,
+//       padding: const EdgeInsets.all(20),
+//       decoration: BoxDecoration(
+//         gradient: LinearGradient(
+//           colors: [AppColors.primary, AppColors.primaryDark],
+//           begin: Alignment.topLeft,
+//           end: Alignment.bottomRight,
+//         ),
+//         borderRadius: BorderRadius.circular(20),
+//         boxShadow: [
+//           BoxShadow(
+//             color: AppColors.primary.withOpacity(0.35),
+//             blurRadius: 20,
+//             offset: const Offset(0, 8),
+//           ),
+//         ],
+//       ),
+//       child: Row(
+//         children: [
+//           Container(
+//             padding: const EdgeInsets.all(14),
+//             decoration: BoxDecoration(
+//               color: AppColors.accent.withOpacity(0.2),
+//               borderRadius: BorderRadius.circular(16),
+//             ),
+//             child: const Text('🎓', style: TextStyle(fontSize: 28)),
+//           ),
+//           const SizedBox(width: 16),
+//           Expanded(
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 const Text('Progression des leçons',
+//                     style: TextStyle(color: Colors.white70, fontSize: 12)),
+//                 const SizedBox(height: 4),
+//                 Text(
+//                   '$completedCount / ${lessons.length} leçons complétées',
+//                   style: const TextStyle(
+//                     color: Colors.white,
+//                     fontSize: 18,
+//                     fontWeight: FontWeight.w800,
+//                   ),
+//                 ),
+//                 const SizedBox(height: 10),
+//                 ClipRRect(
+//                   borderRadius: BorderRadius.circular(6),
+//                   child: LinearProgressIndicator(
+//                     value:
+//                         lessons.isEmpty ? 0 : completedCount / lessons.length,
+//                     backgroundColor: Colors.white.withOpacity(0.2),
+//                     valueColor: AlwaysStoppedAnimation<Color>(AppColors.accent),
+//                     minHeight: 7,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
 }
 
 // ─── Carte d'une leçon ────────────────────────────────────────────────────────
+
+// ─── Carte d'une leçon — SANS numéro, SANS badge Complétée ───────────────────
 
 class _LessonCard extends StatelessWidget {
   final TutorialLesson lesson;
@@ -400,7 +450,7 @@ class _LessonCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isCompleted
-                ? AppColors.success.withOpacity(0.5)
+                ? AppColors.success.withOpacity(0.4)
                 : lesson.color.withOpacity(0.2),
             width: 2,
           ),
@@ -414,35 +464,20 @@ class _LessonCard extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // Bandeau haut
+            // Bandeau haut — SANS numéro, SANS badge Complétée
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 20, vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               decoration: BoxDecoration(
                 color: lesson.color.withOpacity(0.08),
-                borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(18)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(18)),
               ),
               child: Row(
                 children: [
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: lesson.color,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text('$lessonIndex',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 16,
-                          )),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
+                  // Emoji de la leçon au lieu du numéro
+                  // Text(lesson.emoji, style: const TextStyle(fontSize: 30)),
+                  // const SizedBox(width: 12),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -459,67 +494,42 @@ class _LessonCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (isCompleted)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 4),
-                      decoration: BoxDecoration(
-                        color: AppColors.success.withOpacity(0.12),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        children: [
-                          Icon(Icons.check_circle_rounded,
-                              color: AppColors.success, size: 14),
-                          const SizedBox(width: 4),
-                          Text('Complétée',
-                              style: TextStyle(
-                                color: AppColors.success,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w700,
-                              )),
-                        ],
-                      ),
-                    )
-                  else
-                    Text(lesson.emoji,
-                        style: const TextStyle(fontSize: 28)),
+                  // Icône check si complétée — discret, pas de badge
+                  // if (isCompleted)
+                  //   Icon(Icons.check_circle_rounded,
+                  //       color: AppColors.success, size: 22),
                 ],
               ),
             ),
-            // Bas de carte
+            // Bas de carte — bouton "Voir" ou "Commencer"
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 20, vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               child: Row(
                 children: [
                   Icon(Icons.menu_book_rounded,
-                      color: lesson.color.withOpacity(0.5),
-                      size: 16),
+                      color: lesson.color.withOpacity(0.5), size: 16),
                   const SizedBox(width: 6),
                   Text('${lesson.steps.length} étapes',
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey.shade500)),
+                      style:
+                          TextStyle(fontSize: 12, color: Colors.grey.shade500)),
                   const SizedBox(width: 12),
                   Icon(Icons.extension_rounded,
-                      color: lesson.color.withOpacity(0.5),
-                      size: 16),
+                      color: lesson.color.withOpacity(0.5), size: 16),
                   const SizedBox(width: 6),
                   Text('Échiquier interactif',
-                      style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey.shade500)),
+                      style:
+                          TextStyle(fontSize: 12, color: Colors.grey.shade500)),
                   const Spacer(),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 14, vertical: 7),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
                     decoration: BoxDecoration(
                       color: lesson.color,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Text(
-                      isCompleted ? 'Revoir' : 'Commencer',
+                      // "Voir" si complétée, "Commencer" sinon
+                      isCompleted ? 'Voir' : 'Commencer',
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12,
@@ -536,7 +546,6 @@ class _LessonCard extends StatelessWidget {
     );
   }
 }
-
 // ─── Écran d'une leçon ────────────────────────────────────────────────────────
 
 class LessonScreen extends ConsumerStatefulWidget {
@@ -639,12 +648,10 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
 
   Future<void> _completeLesson() async {
     await _tts.stop();
-    // Sauvegarde dans Firebase via le UserProvider
-    await ref
-        .read(userProvider.notifier)
-        .completeTutorial(widget.lesson.id);
-    if (!mounted) return;
-    _showCompletionDialog();
+    // Sauvegarde dans Firebase
+    await ref.read(userProvider.notifier).completeTutorial(widget.lesson.id);
+    // Retourne directement à la liste des tutoriels sans modal
+    if (mounted) Navigator.pop(context);
   }
 
   void _showCompletionDialog() {
@@ -652,8 +659,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
       context: context,
       builder: (_) => AlertDialog(
         backgroundColor: AppColors.background,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -670,8 +676,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
             const SizedBox(height: 8),
             Text(
               'Vous maîtrisez "${widget.lesson.title}" !',
-              style: const TextStyle(
-                  color: Colors.black54, fontSize: 14),
+              style: const TextStyle(color: Colors.black54, fontSize: 14),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 24),
@@ -688,8 +693,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
               },
               child: const Text('Retour aux leçons',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700)),
+                      color: Colors.white, fontWeight: FontWeight.w700)),
             ),
           ],
         ),
@@ -709,8 +713,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded,
-              color: Colors.white),
+          icon: const Icon(Icons.arrow_back_rounded, color: Colors.white),
           onPressed: () {
             _tts.stop();
             Navigator.pop(context);
@@ -722,8 +725,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.volume_up_rounded,
-                color: AppColors.accent),
+            icon: const Icon(Icons.volume_up_rounded, color: AppColors.accent),
             tooltip: 'Relire',
             onPressed: () => _speak(step.content),
           ),
@@ -740,8 +742,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
 
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 20, vertical: 14),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -774,8 +775,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
   Widget _buildProgressBar(int total, Color color) {
     return Container(
       color: Colors.white,
-      padding: const EdgeInsets.symmetric(
-          horizontal: 24, vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       child: Column(
         children: [
           Row(
@@ -799,19 +799,21 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
           ),
           const SizedBox(height: 6),
           Row(
-            children: List.generate(total, (i) => Expanded(
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                margin: const EdgeInsets.symmetric(horizontal: 2),
-                height: 5,
-                decoration: BoxDecoration(
-                  color: i <= _currentStep
-                      ? color
-                      : color.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(3),
-                ),
-              ),
-            )),
+            children: List.generate(
+                total,
+                (i) => Expanded(
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        margin: const EdgeInsets.symmetric(horizontal: 2),
+                        height: 5,
+                        decoration: BoxDecoration(
+                          color: i <= _currentStep
+                              ? color
+                              : color.withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                      ),
+                    )),
           ),
         ],
       ),
@@ -824,8 +826,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
       children: [
         Row(
           children: [
-            Text(step.emoji,
-                style: const TextStyle(fontSize: 36)),
+            Text(step.emoji, style: const TextStyle(fontSize: 36)),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -853,9 +854,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
         ),
         const SizedBox(height: 10),
         Text(
-          step.content
-              .replaceAll('\n\n', ' · ')
-              .replaceAll('\n', ' '),
+          step.content.replaceAll('\n\n', ' · ').replaceAll('\n', ' '),
           style: const TextStyle(
             fontSize: 13,
             color: Color(0xFF444444),
@@ -867,22 +866,19 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
   }
 
   Widget _buildBoard(TutorialStep step) {
-    final chess =
-        chess_lib.Chess.fromFEN(step.fen!, check_validity: false);
+    final chess = chess_lib.Chess.fromFEN(step.fen!, check_validity: false);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             Icon(Icons.touch_app_rounded,
-                size: 13,
-                color: AppColors.primary.withOpacity(0.5)),
+                size: 13, color: AppColors.primary.withOpacity(0.5)),
             const SizedBox(width: 5),
             Text(
               'Cases vertes = mouvements possibles',
               style: TextStyle(
-                  fontSize: 11,
-                  color: AppColors.primary.withOpacity(0.5)),
+                  fontSize: 11, color: AppColors.primary.withOpacity(0.5)),
             ),
           ],
         ),
@@ -905,9 +901,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-              color: Colors.black12,
-              blurRadius: 8,
-              offset: Offset(0, -2)),
+              color: Colors.black12, blurRadius: 8, offset: Offset(0, -2)),
         ],
       ),
       child: Row(
@@ -916,15 +910,12 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
             Expanded(
               child: OutlinedButton.icon(
                 onPressed: _prevStep,
-                icon: const Icon(Icons.arrow_back_rounded,
-                    size: 16),
+                icon: const Icon(Icons.arrow_back_rounded, size: 16),
                 label: const Text('Précédent'),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: AppColors.primary,
-                  side: const BorderSide(
-                      color: AppColors.primary, width: 1.5),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 14),
+                  side: const BorderSide(color: AppColors.primary, width: 1.5),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14)),
                 ),
@@ -936,22 +927,19 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
             child: ElevatedButton.icon(
               onPressed: _nextStep,
               icon: Icon(
-                isLast
-                    ? Icons.check_circle_rounded
-                    : Icons.arrow_forward_rounded,
+                // Icône fermer sur la dernière étape
+                isLast ? Icons.close_rounded : Icons.arrow_forward_rounded,
                 size: 18,
               ),
               label: Text(
-                isLast ? 'Terminer la leçon' : 'Étape suivante',
-                style:
-                    const TextStyle(fontWeight: FontWeight.w700),
+                // "Fermer" sur la dernière étape au lieu de "Terminer"
+                isLast ? 'Fermer' : 'Étape suivante',
+                style: const TextStyle(fontWeight: FontWeight.w700),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor:
-                    isLast ? AppColors.success : color,
+                backgroundColor: isLast ? AppColors.success : color,
                 foregroundColor: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(vertical: 14),
+                padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14)),
                 elevation: 2,

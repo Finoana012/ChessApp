@@ -46,3 +46,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/chess_club.png
+    - assets/images/sans.png
+    - assets/images/san.png

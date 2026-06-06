@@ -102,6 +102,61 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     );
   }
 
+  void _confirmReset(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      backgroundColor: AppColors.background,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20)),
+      title: const Text(
+        'Réinitialiser la partie ?',
+        style: TextStyle(
+          color: AppColors.primary,
+          fontWeight: FontWeight.w700,
+          fontSize: 18,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      content: const Text(
+        'La partie en cours sera perdue.\nVoulez-vous vraiment recommencer ?',
+        style: TextStyle(color: Colors.grey, fontSize: 14),
+        textAlign: TextAlign.center,
+      ),
+      actions: [
+        // Bouton Non
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text(
+            'Non',
+            style: TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        // Bouton Oui
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+            ref.read(gameProvider.notifier).resetGame();
+            setState(() {});
+          },
+          child: const Text(
+            'Oui, recommencer',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(gameProvider);
@@ -131,7 +186,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         ),
         centerTitle: true,
         actions: [
-          // Retourner plateau (mode 2 joueurs)
           if (widget.mode == GameMode.vsFriend)
             IconButton(
               icon: const Icon(Icons.swap_vert_rounded,
@@ -139,12 +193,11 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               onPressed: () =>
                   ref.read(gameProvider.notifier).flipBoard(),
             ),
-          // Nouvelle partie
           IconButton(
             icon: const Icon(Icons.refresh_rounded,
                 color: AppColors.accent),
-            onPressed: () =>
-                ref.read(gameProvider.notifier).resetGame(),
+            tooltip: 'Nouvelle partie',
+            onPressed: () => _confirmReset(context),
           ),
         ],
         bottom: PreferredSize(

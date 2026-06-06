@@ -4,16 +4,24 @@ import '../../../core/constants/app_strings.dart';
 import '../../../domain/entities/game_entity.dart';
 import 'game_screen.dart';
 
-class GameModeScreen extends StatelessWidget {
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../providers/user_provider.dart';
+
+// Changez StatelessWidget en ConsumerWidget
+class GameModeScreen extends ConsumerWidget {
   const GameModeScreen({super.key});
 
-  void _showLevelPicker(BuildContext context) {
+  void _showLevelPicker(BuildContext context, WidgetRef ref) {
+    // Récupère le niveau actuel du joueur
+    final player = ref.read(userProvider).valueOrNull;
+    final currentLevel = player?.currentLevel ?? 1;
+
     showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.background,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-            top: Radius.circular(24)),
+        borderRadius:
+            BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (_) => Padding(
         padding: const EdgeInsets.all(24),
@@ -31,38 +39,60 @@ class GameModeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ...List.generate(5, (i) {
               final level = i + 1;
+              // Niveau débloqué si <= niveau actuel du joueur
+              final unlocked = level <= currentLevel;
               return ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: AppColors.levelColors[i],
+                  backgroundColor: unlocked
+                      ? AppColors.levelColors[i]
+                      : Colors.grey.shade300,
                   child: Text(
-                    AppStrings.levelEmojis[i],
+                    unlocked
+                        ? AppStrings.levelEmojis[i]
+                        : '🔒',
                     style: const TextStyle(fontSize: 16),
                   ),
                 ),
                 title: Text(
                   'Niveau $level — ${AppStrings.levelNames[i]}',
-                  style: const TextStyle(
-                    color: AppColors.primary,
+                  style: TextStyle(
+                    color: unlocked
+                        ? AppColors.primary
+                        : Colors.grey,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_rounded,
+                subtitle: !unlocked
+                    ? Text(
+                        'Battez le niveau ${level - 1} pour débloquer',
+                        style: const TextStyle(
+                            fontSize: 11, color: Colors.grey),
+                      )
+                    : null,
+                trailing: Icon(
+                  unlocked
+                      ? Icons.arrow_forward_ios_rounded
+                      : Icons.lock_rounded,
                   size: 14,
-                  color: AppColors.accent,
+                  color: unlocked
+                      ? AppColors.accent
+                      : Colors.grey.shade300,
                 ),
-                onTap: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => GameScreen(
-                        mode: GameMode.vsSystem,
-                        difficulty: level,
-                      ),
-                    ),
-                  );
-                },
+                // Désactivé si non débloqué
+                onTap: unlocked
+                    ? () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => GameScreen(
+                              mode: GameMode.vsSystem,
+                              difficulty: level,
+                            ),
+                          ),
+                        );
+                      }
+                    : null,
               );
             }),
           ],
@@ -71,8 +101,77 @@ class GameModeScreen extends StatelessWidget {
     );
   }
 
+  void _showFriendDifficultyPicker(BuildContext context, WidgetRef ref) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: AppColors.background,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+    ),
+    builder: (_) => Padding(
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text(
+            'Difficulté de l\'échiquier',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: AppColors.primary,
+            ),
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            'Choisissez la vitesse du chrono (décoratif)',
+            style: TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 20),
+          ...List.generate(3, (i) {
+            final labels = ['Débutant', 'Intermédiaire', 'Avancé'];
+            final emojis = ['🌱', '🔥', '👑'];
+            final colors = [
+              AppColors.success,
+              AppColors.warning,
+              AppColors.error,
+            ];
+            return ListTile(
+              leading: CircleAvatar(
+                backgroundColor: colors[i].withOpacity(0.15),
+                child: Text(emojis[i],
+                    style: const TextStyle(fontSize: 16)),
+              ),
+              title: Text(
+                labels[i],
+                style: TextStyle(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              trailing: const Icon(Icons.arrow_forward_ios_rounded,
+                  size: 14, color: AppColors.accent),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => GameScreen(
+                      mode: GameMode.vsFriend,
+                      difficulty: i + 1,
+                    ),
+                  ),
+                );
+              },
+            );
+          }),
+        ],
+      ),
+    ),
+  );
+}
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
@@ -112,24 +211,17 @@ class GameModeScreen extends StatelessWidget {
               icon: '🤖',
               title: AppStrings.vsSystem,
               subtitle:
-                  'Jouez contre l\'ordinateur\nChoisissez votre niveau (1 à 5)',
-              onTap: () => _showLevelPicker(context),
+                  'Jouez contre l\'ordinateur\nNiveaux débloqués progressivement',
+              onTap: () => _showLevelPicker(context, ref),
             ),
             const SizedBox(height: 20),
             _ModeCard(
-              icon: '👥',
-              title: AppStrings.vsFriend,
-              subtitle:
-                  'Deux joueurs sur le même téléphone\nTour par tour',
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const GameScreen(
-                    mode: GameMode.vsFriend,
-                  ),
-                ),
-              ),
-            ),
+            icon: '👥',
+            title: AppStrings.vsFriend,
+            subtitle: 'Deux joueurs sur le même téléphone\nTour par tour',
+            // Appelle le picker de difficulté au lieu de naviguer directement
+            onTap: () => _showFriendDifficultyPicker(context, ref),
+          ),
           ],
         ),
       ),

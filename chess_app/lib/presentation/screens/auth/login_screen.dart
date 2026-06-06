@@ -70,40 +70,46 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 const SizedBox(height: 40),
 
                 // Logo + nom
-                Center(
+                const Center(
                   child: Column(
                     children: [
-                      Image.asset('assets/images/chess_club.png', width: 100),
-                      const SizedBox(height: 12),
-                      const Text(
-                        AppStrings.appName,
-                        style: TextStyle(
-                          fontSize: 30, fontWeight: FontWeight.w800,
-                          color: AppColors.primary, letterSpacing: 2,
-                        ),
+                      CircleAvatar(
+                        radius: 60, // augmente ou diminue la taille
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: AssetImage('assets/images/san.png'),
                       ),
-                      Text(
-                        AppStrings.tagline,
-                        style: TextStyle(
-                          fontSize: 12, color: AppColors.accent,
-                          letterSpacing: 1,
-                        ),
-                      ),
+                      SizedBox(height: 5),
+                      // Image.asset('assets/images/san.png', width: 100),
+                      // const SizedBox(height: 5),
+                      // const Text(
+                      //   AppStrings.appName,
+                      //   style: TextStyle(
+                      //     fontSize: 30, fontWeight: FontWeight.w800,
+                      //     color: AppColors.primary, letterSpacing: 2,
+                      //   ),
+                      // ),
+                      // Text(
+                      //   AppStrings.tagline,
+                      //   style: TextStyle(
+                      //     fontSize: 12, color: AppColors.accent,
+                      //     letterSpacing: 1,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
 
-                const SizedBox(height: 48),
+                // const SizedBox(height: 48),
 
-                const Text(
-                  'Connexion',
-                  style: TextStyle(
-                    fontSize: 24, fontWeight: FontWeight.w800,
-                    color: AppColors.primary,
-                  ),
-                ),
+                // const Text(
+                //   'Connexion',
+                //   style: TextStyle(
+                //     fontSize: 24, fontWeight: FontWeight.w800,
+                //     color: AppColors.primary,
+                //   ),
+                // ),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 38),
 
                 // Champ email
                 _buildTextField(

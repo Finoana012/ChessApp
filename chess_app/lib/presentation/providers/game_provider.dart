@@ -92,22 +92,54 @@ class GameNotifier extends StateNotifier<GameState> {
 
   // Gère le tap sur une case — logique complète
   void onSquareTap(String square) {
-    if (state.gameOver || state.isLoading) return;
+  if (state.gameOver || state.isLoading) return;
 
-    final piece = state.chess.get(square);
+  final piece = state.chess.get(square);
+  final isWhiteTurn = state.chess.turn == chess_lib.Color.WHITE;
 
-    // CAS 1 — Aucune pièce sélectionnée
-    if (state.selectedSquare == null) {
-      if (piece == null) return;
+  // CAS 1 — Aucune pièce sélectionnée
+  if (state.selectedSquare == null) {
+    if (piece == null) return;
 
-      // Vérification du tour
-      final isWhiteTurn = state.chess.turn == chess_lib.Color.WHITE;
-      final isWhitePiece = piece.color == chess_lib.Color.WHITE;
+    final isWhitePiece = piece.color == chess_lib.Color.WHITE;
 
-      // En mode vsSystem, seuls les blancs jouent manuellement
-      if (state.entity?.mode == GameMode.vsSystem && !isWhitePiece) return;
-      if (isWhiteTurn != isWhitePiece) return;
+    // Mode vsSystem : seuls les blancs jouent manuellement
+    if (state.entity?.mode == GameMode.vsSystem && !isWhitePiece) return;
+    // Vérification du tour
+    if (isWhiteTurn != isWhitePiece) return;
 
+    final moves = _getLegalMoves(square);
+    if (moves.isEmpty) return; // Pas de mouvements légaux
+
+    state = state.copyWith(
+      selectedSquare: square,
+      legalMoves: moves,
+    );
+    return;
+  }
+
+  // CAS 2 — Clic sur la même case = déselectionner
+  if (state.selectedSquare == square) {
+    state = state.copyWith(clearSelected: true);
+    return;
+  }
+
+  // CAS 3 — Clic sur un mouvement légal = jouer le coup
+  // PRIORITÉ sur tout le reste — même si la case a une pièce
+  if (state.legalMoves.contains(square)) {
+    _makeMove(state.selectedSquare!, square);
+    return;
+  }
+
+  // CAS 4 — Clic sur une autre pièce alliée = changer la sélection
+  if (piece != null) {
+    final isWhitePiece = piece.color == chess_lib.Color.WHITE;
+    if (isWhiteTurn == isWhitePiece) {
+      // En mode vsSystem, seuls les blancs peuvent être sélectionnés
+      if (state.entity?.mode == GameMode.vsSystem && !isWhitePiece) {
+        state = state.copyWith(clearSelected: true);
+        return;
+      }
       final moves = _getLegalMoves(square);
       state = state.copyWith(
         selectedSquare: square,
@@ -115,55 +147,47 @@ class GameNotifier extends StateNotifier<GameState> {
       );
       return;
     }
-
-    // CAS 2 — Clic sur la même case → déselectionner
-    if (state.selectedSquare == square) {
-      state = state.copyWith(clearSelected: true);
-      return;
-    }
-
-    // CAS 3 — Clic sur un mouvement légal → jouer le coup
-    if (state.legalMoves.contains(square)) {
-      _makeMove(state.selectedSquare!, square);
-      return;
-    }
-
-    // CAS 4 — Clic sur une autre pièce alliée → changer la sélection
-    if (piece != null) {
-      final isWhiteTurn = state.chess.turn == chess_lib.Color.WHITE;
-      final isWhitePiece = piece.color == chess_lib.Color.WHITE;
-      if (isWhiteTurn == isWhitePiece) {
-        state = state.copyWith(
-          selectedSquare: square,
-          legalMoves: _getLegalMoves(square),
-        );
-        return;
-      }
-    }
-
-    // CAS 5 — Case non légale → déselectionner
-    state = state.copyWith(clearSelected: true);
   }
+
+  // CAS 5 — Rien de valide = déselectionner
+  state = state.copyWith(clearSelected: true);
+}
 
   // Joue le coup et vérifie l'état
   void _makeMove(String from, String to) {
-    final success = state.chess.move({'from': from, 'to': to});
-    if (!success) return;
+  // Vérifie si c'est un coup de promotion (pion arrive en ligne 8 ou 1)
+  final piece = state.chess.get(from);
+  final isPromotion = piece != null &&
+      piece.type.name == 'p' &&
+      ((piece.color == chess_lib.Color.WHITE && to[1] == '8') ||
+       (piece.color == chess_lib.Color.BLACK && to[1] == '1'));
 
-    final isOver = state.chess.game_over;
-    state = state.copyWith(
-      clearSelected: true,
-      gameOver: isOver,
-    );
-
-    // Si c'est le tour de l'IA → elle joue après 500ms
-    if (!isOver &&
-        state.entity?.mode == GameMode.vsSystem &&
-        state.chess.turn == chess_lib.Color.BLACK) {
-      _scheduleAiMove();
-    }
+  bool success;
+  if (isPromotion) {
+    // Promotion automatique en Dame
+    success = state.chess.move({
+      'from': from,
+      'to': to,
+      'promotion': 'q', // q = queen = Dame
+    });
+  } else {
+    success = state.chess.move({'from': from, 'to': to});
   }
 
+  if (!success) return;
+
+  final isOver = state.chess.game_over;
+  state = state.copyWith(
+    clearSelected: true,
+    gameOver: isOver,
+  );
+
+  if (!isOver &&
+      state.entity?.mode == GameMode.vsSystem &&
+      state.chess.turn == chess_lib.Color.BLACK) {
+    _scheduleAiMove();
+  }
+}
   // L'IA joue après un délai (pour simuler la réflexion)
   void _scheduleAiMove() {
     state = state.copyWith(isLoading: true);
@@ -229,12 +253,26 @@ class GameNotifier extends StateNotifier<GameState> {
 
   // Retourne les mouvements légaux depuis une case
   List<String> _getLegalMoves(String square) {
-    final moves = state.chess.moves({'square': square, 'verbose': true});
-    return moves.map((m) {
-      if (m is Map) return m['to'].toString();
-      return m.toString();
-    }).toList();
+  // verbose:true retourne des Maps avec 'from', 'to', 'flags'
+  // On doit utiliser moves() avec asObjects pour avoir tous les coups
+  // incluant les promotions et captures
+  final moves = state.chess.moves({
+    'square': square,
+    'verbose': true,
+  });
+
+  // Un pion en f7 qui capture en g8 génère 4 coups (un par promotion)
+  // On déduplique les cases 'to' pour n'afficher qu'un seul point vert
+  final Set<String> destinations = {};
+  for (final move in moves) {
+    if (move is Map) {
+      destinations.add(move['to'].toString());
+    } else {
+      destinations.add(move.toString());
+    }
   }
+  return destinations.toList();
+}
 
   // Retourne le plateau (mode 2 joueurs)
   void flipBoard() => state = state.copyWith(flipped: !state.flipped);

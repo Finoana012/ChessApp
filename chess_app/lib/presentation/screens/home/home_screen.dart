@@ -57,36 +57,28 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(8),
-          child: CircleAvatar(
-            backgroundColor: AppColors.background,
-            backgroundImage:
-                const AssetImage('assets/images/chess_club.png'),
-          ),
-        ),
+        // PLUS de leading avec le logo
+        // Le titre "ChessApp" est maintenant à gauche
         title: const Text(
-          AppStrings.appName,
+          'ChessApp',
           style: TextStyle(
             color: AppColors.background,
             fontWeight: FontWeight.w800,
-            fontSize: 22,
+            fontSize: 24,
             letterSpacing: 2,
           ),
         ),
-        centerTitle: true,
+        // centerTitle: false — titre à gauche
+        centerTitle: false,
         actions: [
-          // Profil
           IconButton(
             icon: const Icon(Icons.person_rounded,
                 color: AppColors.accent),
             onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (_) => const ProfileScreen()),
+              MaterialPageRoute(builder: (_) => const ProfileScreen()),
             ),
           ),
-          // Quitter
           IconButton(
             icon: const Icon(Icons.exit_to_app_rounded,
                 color: AppColors.accent),
@@ -133,19 +125,19 @@ class HomeScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 14),
 
-            // Niveaux
-            _MenuCard(
-              icon: Icons.emoji_events_rounded,
-              label: AppStrings.levels,
-              subtitle: 'Progresser du niveau 1 au niveau 5',
-              color: AppColors.accent,
-              completed: (player?.currentLevel ?? 1) - 1,
-              total: 5,
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(
-                      builder: (_) => const LevelScreen())),
-            ),
-            const SizedBox(height: 14),
+            // // Niveaux
+            // _MenuCard(
+            //   icon: Icons.emoji_events_rounded,
+            //   label: AppStrings.levels,
+            //   subtitle: 'Progresser du niveau 1 au niveau 5',
+            //   color: AppColors.accent,
+            //   completed: (player?.currentLevel ?? 1) - 1,
+            //   total: 5,
+            //   onTap: () => Navigator.push(context,
+            //       MaterialPageRoute(
+            //           builder: (_) => const LevelScreen())),
+            // ),
+            // const SizedBox(height: 14),
 
             //Jouer
             _MenuCard(
@@ -172,6 +164,68 @@ class HomeScreen extends ConsumerWidget {
       ),
     );
   }
+
+  Widget _buildLevelProgressCard(dynamic player) {
+  final currentLevel = player?.currentLevel ?? 1;
+  return Container(
+    width: double.infinity,
+    padding: const EdgeInsets.all(16),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(16),
+      border: Border.all(
+          color: AppColors.accent.withOpacity(0.3), width: 1.5),
+    ),
+    child: Row(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: AppColors.accent.withOpacity(0.12),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: const Icon(Icons.emoji_events_rounded,
+              color: AppColors.accent, size: 22),
+        ),
+        const SizedBox(width: 14),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Niveau $currentLevel / 5 — ${AppStrings.levelNames[currentLevel - 1]}',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.primary,
+                ),
+              ),
+              const SizedBox(height: 6),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: LinearProgressIndicator(
+                  value: currentLevel / 5,
+                  backgroundColor: AppColors.accent.withOpacity(0.12),
+                  valueColor: const AlwaysStoppedAnimation<Color>(
+                      AppColors.accent),
+                  minHeight: 5,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                currentLevel < 5
+                    ? 'Battez le niveau $currentLevel pour débloquer le suivant'
+                    : 'Tous les niveaux débloqués !',
+                style: const TextStyle(
+                    fontSize: 11, color: Colors.grey),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
 
   Widget _buildWelcomeCard(dynamic player) {
     final username = player?.username ?? 'Joueur';
