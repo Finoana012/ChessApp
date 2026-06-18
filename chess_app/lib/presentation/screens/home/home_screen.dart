@@ -21,7 +21,7 @@ class HomeScreen extends ConsumerWidget {
         backgroundColor: AppColors.background,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20)),
-        title: const Text('Quitter ChessApp ?',
+        title: const Text('Quitter l\'application',
             style: TextStyle(
                 color: AppColors.primary, fontWeight: FontWeight.w700)),
         content: const Text(
@@ -152,13 +152,13 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 14),
 
             // Quitter
-            _MenuCard(
-              icon: Icons.exit_to_app_rounded,
-              label: 'Quitter',
-              subtitle: 'Fermer l\'application',
-              color: AppColors.error,
-              onTap: () => _confirmQuit(context),
-            ),
+            // _MenuCard(
+            //   icon: Icons.exit_to_app_rounded,
+            //   label: 'Quitter',
+            //   subtitle: 'Fermer l\'application',
+            //   color: AppColors.error,
+            //   onTap: () => _confirmQuit(context),
+            // ),
           ],
         ),
       ),

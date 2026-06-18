@@ -229,7 +229,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             ),
 
           // Échiquier
-          Padding(
+         Padding(
             padding: const EdgeInsets.all(10),
             child: ChessBoardWidget(
               chess: state.chess,
@@ -239,7 +239,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               onSquareTap: (sq) =>
                   ref.read(gameProvider.notifier).onSquareTap(sq),
             ),
-          ),
+          ),      
         ],
       ),
     );
@@ -249,7 +249,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final isWhite = state.chess.turn.name == 'white';
     return Container(
       padding: const EdgeInsets.symmetric(
-          vertical: 10, horizontal: 16),
+          vertical: 20, horizontal: 16),
       color: AppColors.primary.withOpacity(0.08),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -262,7 +262,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             style: const TextStyle(
               color: AppColors.primary,
               fontWeight: FontWeight.w700,
-              fontSize: 14,
+              fontSize: 16,
             ),
           ),
           // Spinner pendant que l'IA réfléchit

@@ -6,6 +6,7 @@ import '../../providers/auth_provider.dart';
 import '../../providers/user_provider.dart';
 import 'register_screen.dart';
 import '../home/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -26,6 +27,37 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     _passwordController.dispose();
     super.dispose();
   }
+
+  Future<void> _resetPassword() async {
+  if (_emailController.text.trim().isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Veuillez saisir votre adresse email.'),
+      ),
+    );
+    return;
+  }
+
+  try {
+    await FirebaseAuth.instance.sendPasswordResetEmail(
+      email: _emailController.text.trim(),
+    );
+
+    if (!mounted) return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'Un email de réinitialisation a été envoyé.',
+        ),
+      ),
+    );
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Erreur : $e')),
+    );
+  }
+}
 
   Future<void> _signIn() async {
     if (!_formKey.currentState!.validate()) return;
@@ -70,15 +102,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 const SizedBox(height: 40),
 
                 // Logo + nom
-                const Center(
+                Center(
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: 60, // augmente ou diminue la taille
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: AssetImage('assets/images/san.png'),
-                      ),
-                      SizedBox(height: 5),
+                      Container(
+  padding: const EdgeInsets.all(4),
+  decoration: BoxDecoration(
+    shape: BoxShape.circle,
+    border: Border.all(
+      color: AppColors.primary,
+      width: 2,
+    ),
+  ),
+  child: const CircleAvatar(
+    radius: 40,
+    backgroundColor: Colors.white,
+    backgroundImage: AssetImage('assets/images/san.png'),
+  ),
+),
+                      const SizedBox(height: 30),
                       // Image.asset('assets/images/san.png', width: 100),
                       // const SizedBox(height: 5),
                       // const Text(
@@ -197,6 +239,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                   ),
                 ),
+                               Align(
+  alignment: Alignment.centerRight,
+  child: TextButton(
+    onPressed: _resetPassword,
+    child: const Text(
+      'Mot de passe oublié ?',
+      style: TextStyle(color: AppColors.primary),
+    ),
+  ),
+),
+
 
                 const SizedBox(height: 20),
 

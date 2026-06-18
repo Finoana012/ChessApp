@@ -825,34 +825,33 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(step.emoji, style: const TextStyle(fontSize: 36)),
+            Text(step.emoji, style: const TextStyle(fontSize: 32)),
             const SizedBox(width: 12),
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(step.title,
+              child: Text(
+               step.title,
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
                         color: color,
                       )),
-                  Container(
-                    margin: const EdgeInsets.only(top: 4),
-                    height: 3,
-                    width: 40,
-                    decoration: BoxDecoration(
-                      color: AppColors.accent,
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                ],
-              ),
+                  // Container(
+                  //   margin: const EdgeInsets.only(top: 4),
+                  //   height: 3,
+                  //   width: 40,
+                  //   decoration: BoxDecoration(
+                  //     color: AppColors.accent,
+                  //     borderRadius: BorderRadius.circular(2),
+                  //   ),
+                  // ),
+                
+              
             ),
           ],
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 16),
         Text(
           step.content.replaceAll('\n\n', ' · ').replaceAll('\n', ' '),
           style: const TextStyle(
