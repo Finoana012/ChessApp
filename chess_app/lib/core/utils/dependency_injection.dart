@@ -16,7 +16,19 @@ import '../../domain/usecases/unlock_level_usecase.dart';
 
 // Providers Riverpod — Principe D : injection de dépendances
 // Chaque provider déclare ses dépendances explicitement
+import '../../data/datasources/multiplayer_datasource.dart';
+import '../../data/repositories/multiplayer_repository_impl.dart';
+import '../../domain/repositories/i_multiplayer_repository.dart';
 
+final multiplayerDataSourceProvider =
+    Provider<MultiplayerDataSource>((ref) => MultiplayerDataSource(
+          db: ref.read(firestoreProvider),
+        ));
+
+final multiplayerRepositoryProvider =
+    Provider<IMultiplayerRepository>((ref) => MultiplayerRepositoryImpl(
+          dataSource: ref.read(multiplayerDataSourceProvider),
+        ));
 // Firebase
 final firebaseAuthProvider =
     Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);

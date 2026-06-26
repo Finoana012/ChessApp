@@ -10,6 +10,9 @@ import '../tutorial/tutorial_screen.dart';
 import '../level/level_screen.dart';
 import '../game/game_mode_screen.dart';
 import '../profile/profile_screen.dart';
+import '../game/invitations_screen.dart';
+import '../../providers/multiplayer_provider.dart';
+import '../game/invitations_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -71,6 +74,65 @@ class HomeScreen extends ConsumerWidget {
         // centerTitle: false — titre à gauche
         centerTitle: false,
         actions: [
+          // Badge avec compteur d'invitations en attente
+Consumer(
+  builder: (context, ref, _) {
+    final player = ref.watch(currentPlayerProvider);
+    if (player == null) {
+      return IconButton(
+        icon: const Icon(Icons.mail_outline_rounded,
+            color: AppColors.accent),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => const InvitationsScreen()),
+        ),
+      );
+    }
+
+    final invitationsAsync =
+        ref.watch(invitationsStreamProvider(player.email));
+    final count = invitationsAsync.valueOrNull?.length ?? 0;
+
+    return Stack(
+      children: [
+        IconButton(
+          icon: const Icon(Icons.mail_outline_rounded,
+              color: AppColors.accent),
+          tooltip: 'Invitations',
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => const InvitationsScreen()),
+          ),
+        ),
+        if (count > 0)
+          Positioned(
+            right: 6,
+            top: 6,
+            child: Container(
+              padding: const EdgeInsets.all(3),
+              decoration: const BoxDecoration(
+                color: AppColors.error,
+                shape: BoxShape.circle,
+              ),
+              constraints:
+                  const BoxConstraints(minWidth: 16, minHeight: 16),
+              child: Text(
+                '$count',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+      ],
+    );
+  },
+),
           IconButton(
             icon: const Icon(Icons.person_rounded,
                 color: AppColors.accent),

@@ -6,6 +6,7 @@ import 'game_screen.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/user_provider.dart';
+import 'multiplayer_screen.dart';
 
 // Changez StatelessWidget en ConsumerWidget
 class GameModeScreen extends ConsumerWidget {
@@ -194,7 +195,7 @@ class GameModeScreen extends ConsumerWidget {
       ),
       body: Padding(
         // padding: const EdgeInsets.all(24),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 65),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -222,6 +223,19 @@ class GameModeScreen extends ConsumerWidget {
             subtitle: 'Deux joueurs sur le même téléphone\nTour par tour',
             // Appelle le picker de difficulté au lieu de naviguer directement
             onTap: () => _showFriendDifficultyPicker(context, ref),
+          ),
+
+          const SizedBox(height: 20),
+          _ModeCard(
+            icon: '🌐',
+            title: 'Jouer en ligne',
+            subtitle: 'Invitez un ami par email\nJouez en temps réel',
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const MultiplayerLobbyScreen(),
+              ),
+            ),
           ),
           ],
         ),
