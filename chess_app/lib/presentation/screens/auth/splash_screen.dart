@@ -1,6 +1,8 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/app_colors.dart';
+import '../../../firebase_options.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/user_provider.dart';
 import 'login_screen.dart';
@@ -15,6 +17,11 @@ class SplashScreen extends ConsumerStatefulWidget {
 
 class _SplashScreenState extends ConsumerState<SplashScreen>
     with SingleTickerProviderStateMixin {
+
+  // Lance Firebase immédiatement en parallèle de l'affichage
+  final Future<void> _firebaseInit = Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   late AnimationController _controller;
   late Animation<double> _fadeIn;
@@ -35,14 +42,34 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       parent: _controller,
       curve: Curves.easeInOut,
     );
-    _controller.forward();
+
+    // Précharge l'image avant de lancer l'animation
+    // pour que la barre parte de 0% visible avec l'image déjà affichée
+    _preloadAndStart();
 
     // Navigation après le chargement
     _controller.addStatusListener((status) async {
       if (status == AnimationStatus.completed && mounted) {
-        _navigate();
+        try {
+          await _firebaseInit;
+        } catch (_) {
+          // Firebase échoué — on navigue quand même pour ne pas bloquer l'utilisateur
+        }
+        if (mounted) _navigate();
       }
     });
+  }
+
+  Future<void> _preloadAndStart() async {
+    try {
+      await precacheImage(
+        const AssetImage('assets/images/chess_club.png'),
+        context,
+      );
+    } catch (_) {
+      // Image introuvable — on lance l'anim quand même
+    }
+    if (mounted) _controller.forward();
   }
 
   void _navigate() {
@@ -117,7 +144,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                       Container(
                         height: 10,
                         decoration: BoxDecoration(
-                          color: AppColors.primary.withOpacity(0.15),
+                          color: AppColors.primary.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: ClipRRect(

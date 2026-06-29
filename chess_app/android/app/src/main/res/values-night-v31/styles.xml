@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme for Android 12+ (API 31+) — overrides the default LaunchTheme
+         to customize the system SplashScreen that shows the app icon -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">@drawable/launch_background</item>
+        <!-- Android 12+ SplashScreen: set background to match our splash -->
+        <item name="android:windowSplashScreenBackground">@color/splash_background</item>
+        <!-- Hide the default Flutter app icon from the system splash -->
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_icon_transparent</item>
+    </style>
+</resources>

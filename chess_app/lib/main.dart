@@ -1,19 +1,9 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/constants/app_colors.dart';
 import 'presentation/screens/auth/splash_screen.dart';
-import 'firebase_options.dart';
 
-void main() async {
-  // Obligatoire avant tout appel asynchrone dans main()
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialisation Firebase — doit être fait avant runApp()
-  await Firebase.initializeApp(
-  options: DefaultFirebaseOptions.currentPlatform,
-);
-
+void main() {
   // ProviderScope est le widget racine de Riverpod
   // Il permet à tous les providers d'être accessibles partout
   runApp(const ProviderScope(child: ChessApp()));
