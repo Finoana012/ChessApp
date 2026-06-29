@@ -9,7 +9,6 @@ import '../../data/repositories/user_repository_impl.dart';
 import '../../domain/repositories/i_auth_repository.dart';
 import '../../domain/repositories/i_user_repository.dart';
 import '../../domain/usecases/complete_tutorial_usecase.dart';
-import '../../domain/usecases/make_move_usecase.dart';
 import '../../domain/usecases/sign_in_usecase.dart';
 import '../../domain/usecases/sign_up_usecase.dart';
 import '../../domain/usecases/unlock_level_usecase.dart';
@@ -63,10 +62,6 @@ final signInUseCaseProvider =
 
 final signUpUseCaseProvider =
     Provider((ref) => SignUpUseCase(ref.read(authRepositoryProvider)));
-
-// final makeMoveUseCaseProvider =
-//     Provider((ref) => MakeMoveUseCase(
-//         ref.read(gameRepositoryProvider)));
 
 final unlockLevelUseCaseProvider =
     Provider((ref) => UnlockLevelUseCase(

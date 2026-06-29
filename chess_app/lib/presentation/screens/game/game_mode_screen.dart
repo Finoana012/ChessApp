@@ -144,7 +144,7 @@ class GameModeScreen extends ConsumerWidget {
               ),
               title: Text(
                 labels[i],
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.primary,
                   fontWeight: FontWeight.w600,
                 ),
@@ -195,7 +195,7 @@ class GameModeScreen extends ConsumerWidget {
       ),
       body: Padding(
         // padding: const EdgeInsets.all(24),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 35),
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -208,7 +208,7 @@ class GameModeScreen extends ConsumerWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 35),
             _ModeCard(
               icon: '🤖',
               title: AppStrings.vsSystem,

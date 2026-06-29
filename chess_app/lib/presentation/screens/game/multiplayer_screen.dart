@@ -200,7 +200,7 @@ class _MultiplayerLobbyScreenState
                 color: AppColors.primary,
               ),
             ),
-            const SizedBox(height: 6),
+            const SizedBox(height: 10),
             const Text(
               'Entrez l\'email de votre ami pour l\'inviter',
               style: TextStyle(fontSize: 13, color: Colors.grey),
@@ -275,7 +275,7 @@ class _MultiplayerLobbyScreenState
               ),
 
             if (_roomCreated) ...[
-              const SizedBox(height: 28),
+              const SizedBox(height: 18),
               Row(
                 children: [
                   const SizedBox(
@@ -294,11 +294,6 @@ class _MultiplayerLobbyScreenState
                     ),
                   ),
                 ],
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'L\'invitation expire automatiquement après $_expirationMinutes minutes.',
-                style: const TextStyle(fontSize: 11, color: Colors.grey),
               ),
             ],
 
@@ -443,14 +438,14 @@ class OnlineGameScreen extends ConsumerWidget {
           children: [
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(vertical: 20),
               color: isMyTurn
                   ? AppColors.success.withOpacity(0.12)
                   : AppColors.primary.withOpacity(0.08),
               child: Center(
                 child: Text(
                   isMyTurn
-                      ? '✓ À vous de jouer !'
+                      ? 'Votre tour !'
                       : 'En attente de l\'adversaire...',
                   style: TextStyle(
                     fontWeight: FontWeight.w700,

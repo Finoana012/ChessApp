@@ -38,9 +38,9 @@ class ProfileScreen extends ConsumerWidget {
                 children: [
                   // Avatar
                   Container(
-                    width: 90,
-                    height: 90,
-                    decoration: BoxDecoration(
+                    width: 70,
+                    height: 70,
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: AppColors.primary,
                     ),
@@ -51,7 +51,7 @@ class ProfileScreen extends ConsumerWidget {
                             : '?',
                         style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 40,
+                          fontSize: 30,
                           fontWeight: FontWeight.w800,
                         ),
                       ),
@@ -70,7 +70,7 @@ class ProfileScreen extends ConsumerWidget {
                       style: const TextStyle(
                           fontSize: 13, color: Colors.grey)),
 
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 32),
 
                   // Stats
                   Row(
@@ -95,7 +95,7 @@ class ProfileScreen extends ConsumerWidget {
                     ],
                   ),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 18),
 
                   // Tutoriels complétés
                   _InfoCard(
@@ -106,7 +106,7 @@ class ProfileScreen extends ConsumerWidget {
                     color: AppColors.info,
                   ),
 
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 14),
 
                   // Taux de victoire
                   _InfoCard(
@@ -117,7 +117,7 @@ class ProfileScreen extends ConsumerWidget {
                     color: AppColors.warning,
                   ),
 
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 28),
 
                   // Bouton déconnexion
                   SizedBox(
@@ -172,7 +172,7 @@ class _StatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(14),
@@ -221,7 +221,7 @@ class _InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),

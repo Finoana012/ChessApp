@@ -45,7 +45,7 @@ class TutorialLesson {
 // ─── Données des 3 leçons ─────────────────────────────────────────────────────
 
 final List<TutorialLesson> lessons = [
-  TutorialLesson(
+  const TutorialLesson(
     id: 'lesson_1',
     title: 'Les pièces',
     subtitle: 'Les 6 pièces et leurs mouvements',
@@ -166,7 +166,7 @@ final List<TutorialLesson> lessons = [
       ),
     ],
   ),
-  TutorialLesson(
+  const TutorialLesson(
     id: 'lesson_2',
     title: 'Règles spéciales',
     subtitle: 'Roque, en passant et promotion',
@@ -231,7 +231,7 @@ final List<TutorialLesson> lessons = [
       ),
     ],
   ),
-  TutorialLesson(
+  const TutorialLesson(
     id: 'lesson_3',
     title: 'Stratégie',
     subtitle: 'Les 5 principes fondamentaux',
@@ -356,73 +356,7 @@ class TutorialScreen extends ConsumerWidget {
       ),
     );
   }
-
-//   Widget _buildProgressHeader(int completedCount) {
-//     return Container(
-//       width: double.infinity,
-//       padding: const EdgeInsets.all(20),
-//       decoration: BoxDecoration(
-//         gradient: LinearGradient(
-//           colors: [AppColors.primary, AppColors.primaryDark],
-//           begin: Alignment.topLeft,
-//           end: Alignment.bottomRight,
-//         ),
-//         borderRadius: BorderRadius.circular(20),
-//         boxShadow: [
-//           BoxShadow(
-//             color: AppColors.primary.withOpacity(0.35),
-//             blurRadius: 20,
-//             offset: const Offset(0, 8),
-//           ),
-//         ],
-//       ),
-//       child: Row(
-//         children: [
-//           Container(
-//             padding: const EdgeInsets.all(14),
-//             decoration: BoxDecoration(
-//               color: AppColors.accent.withOpacity(0.2),
-//               borderRadius: BorderRadius.circular(16),
-//             ),
-//             child: const Text('🎓', style: TextStyle(fontSize: 28)),
-//           ),
-//           const SizedBox(width: 16),
-//           Expanded(
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 const Text('Progression des leçons',
-//                     style: TextStyle(color: Colors.white70, fontSize: 12)),
-//                 const SizedBox(height: 4),
-//                 Text(
-//                   '$completedCount / ${lessons.length} leçons complétées',
-//                   style: const TextStyle(
-//                     color: Colors.white,
-//                     fontSize: 18,
-//                     fontWeight: FontWeight.w800,
-//                   ),
-//                 ),
-//                 const SizedBox(height: 10),
-//                 ClipRRect(
-//                   borderRadius: BorderRadius.circular(6),
-//                   child: LinearProgressIndicator(
-//                     value:
-//                         lessons.isEmpty ? 0 : completedCount / lessons.length,
-//                     backgroundColor: Colors.white.withOpacity(0.2),
-//                     valueColor: AlwaysStoppedAnimation<Color>(AppColors.accent),
-//                     minHeight: 7,
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
 }
-
-// ─── Carte d'une leçon ────────────────────────────────────────────────────────
 
 // ─── Carte d'une leçon — SANS numéro, SANS badge Complétée ───────────────────
 
@@ -494,10 +428,7 @@ class _LessonCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Icône check si complétée — discret, pas de badge
-                  // if (isCompleted)
-                  //   Icon(Icons.check_circle_rounded,
-                  //       color: AppColors.success, size: 22),
+                 
                 ],
               ),
             ),
@@ -837,17 +768,6 @@ class _LessonScreenState extends ConsumerState<LessonScreen>
                         fontWeight: FontWeight.w800,
                         color: color,
                       )),
-                  // Container(
-                  //   margin: const EdgeInsets.only(top: 4),
-                  //   height: 3,
-                  //   width: 40,
-                  //   decoration: BoxDecoration(
-                  //     color: AppColors.accent,
-                  //     borderRadius: BorderRadius.circular(2),
-                  //   ),
-                  // ),
-                
-              
             ),
           ],
         ),

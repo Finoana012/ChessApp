@@ -5,14 +5,11 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_strings.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/user_provider.dart';
-import '../auth/login_screen.dart';
 import '../tutorial/tutorial_screen.dart';
-import '../level/level_screen.dart';
 import '../game/game_mode_screen.dart';
 import '../profile/profile_screen.dart';
 import '../game/invitations_screen.dart';
 import '../../providers/multiplayer_provider.dart';
-import '../game/invitations_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -53,7 +50,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final player = ref.watch(userProvider).valueOrNull;
-    final authPlayer = ref.watch(currentPlayerProvider);
+    ref.watch(currentPlayerProvider);
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -75,14 +72,14 @@ class HomeScreen extends ConsumerWidget {
         centerTitle: false,
         actions: [
           // Badge avec compteur d'invitations en attente
-Consumer(
-  builder: (context, ref, _) {
-    final player = ref.watch(currentPlayerProvider);
-    if (player == null) {
-      return IconButton(
-        icon: const Icon(Icons.mail_outline_rounded,
-            color: AppColors.accent),
-        onPressed: () => Navigator.push(
+        Consumer(
+          builder: (context, ref, _) {
+            final player = ref.watch(currentPlayerProvider);
+            if (player == null) {
+              return IconButton(
+                icon: const Icon(Icons.mail_outline_rounded,
+                color: AppColors.accent),
+                onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(
               builder: (_) => const InvitationsScreen()),
@@ -157,12 +154,7 @@ Consumer(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Carte de bienvenue avec progression
-            _buildWelcomeCard(player ?? authPlayer),
-
-            const SizedBox(height: 28),
-
-            Text(
+            const Text(
               'Que voulez-vous faire ?',
               style: TextStyle(
                 fontSize: 18,
@@ -171,7 +163,7 @@ Consumer(
               ),
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
 
             // Tutoriels
             _MenuCard(
@@ -185,21 +177,7 @@ Consumer(
                   MaterialPageRoute(
                       builder: (_) => const TutorialScreen())),
             ),
-            const SizedBox(height: 14),
-
-            // // Niveaux
-            // _MenuCard(
-            //   icon: Icons.emoji_events_rounded,
-            //   label: AppStrings.levels,
-            //   subtitle: 'Progresser du niveau 1 au niveau 5',
-            //   color: AppColors.accent,
-            //   completed: (player?.currentLevel ?? 1) - 1,
-            //   total: 5,
-            //   onTap: () => Navigator.push(context,
-            //       MaterialPageRoute(
-            //           builder: (_) => const LevelScreen())),
-            // ),
-            // const SizedBox(height: 14),
+            const SizedBox(height: 16),
 
             //Jouer
             _MenuCard(
@@ -211,148 +189,18 @@ Consumer(
                   MaterialPageRoute(
                       builder: (_) => const GameModeScreen())),
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 16),
 
-            // Quitter
-            // _MenuCard(
-            //   icon: Icons.exit_to_app_rounded,
-            //   label: 'Quitter',
-            //   subtitle: 'Fermer l\'application',
-            //   color: AppColors.error,
-            //   onTap: () => _confirmQuit(context),
-            // ),
+            //Quitter
+            _MenuCard(
+              icon: Icons.exit_to_app_rounded,
+              label: 'Quitter',
+              subtitle: 'Fermer l\'application',
+              color: AppColors.error,
+              onTap: () => _confirmQuit(context),
+            ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildLevelProgressCard(dynamic player) {
-  final currentLevel = player?.currentLevel ?? 1;
-  return Container(
-    width: double.infinity,
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(16),
-      border: Border.all(
-          color: AppColors.accent.withOpacity(0.3), width: 1.5),
-    ),
-    child: Row(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: AppColors.accent.withOpacity(0.12),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: const Icon(Icons.emoji_events_rounded,
-              color: AppColors.accent, size: 22),
-        ),
-        const SizedBox(width: 14),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Niveau $currentLevel / 5 — ${AppStrings.levelNames[currentLevel - 1]}',
-                style: const TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.primary,
-                ),
-              ),
-              const SizedBox(height: 6),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: LinearProgressIndicator(
-                  value: currentLevel / 5,
-                  backgroundColor: AppColors.accent.withOpacity(0.12),
-                  valueColor: const AlwaysStoppedAnimation<Color>(
-                      AppColors.accent),
-                  minHeight: 5,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                currentLevel < 5
-                    ? 'Battez le niveau $currentLevel pour débloquer le suivant'
-                    : 'Tous les niveaux débloqués !',
-                style: const TextStyle(
-                    fontSize: 11, color: Colors.grey),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-  Widget _buildWelcomeCard(dynamic player) {
-    final username = player?.username ?? 'Joueur';
-    final level = player?.currentLevel ?? 1;
-    final wins = player?.totalWins ?? 0;
-    final games = player?.totalGamesPlayed ?? 0;
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primary.withOpacity(0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: AppColors.accent.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(14),
-            ),
-            child: const Text('♔',
-                style: TextStyle(fontSize: 28, color: AppColors.accent)),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Bonjour, $username !',
-                  style: const TextStyle(
-                    color: Colors.white, fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Niveau $level / 5 · $wins victoires / $games parties',
-                  style: const TextStyle(
-                      color: Colors.white70, fontSize: 12),
-                ),
-                const SizedBox(height: 10),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: LinearProgressIndicator(
-                    value: level / 5,
-                    backgroundColor: Colors.white.withOpacity(0.2),
-                    valueColor: const AlwaysStoppedAnimation<Color>(
-                        AppColors.accent),
-                    minHeight: 6,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -453,7 +301,7 @@ class _MenuCard extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Icon(Icons.arrow_forward_ios_rounded,
-                color: color.withOpacity(0.4), size: 14),
+              color: color.withOpacity(0.4), size: 14),
           ],
         ),
       ),

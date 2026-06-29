@@ -106,52 +106,27 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   child: Column(
                     children: [
                       Container(
-  padding: const EdgeInsets.all(4),
-  decoration: BoxDecoration(
-    shape: BoxShape.circle,
-    border: Border.all(
-      color: AppColors.primary,
-      width: 2,
-    ),
-  ),
-  child: const CircleAvatar(
-    radius: 40,
-    backgroundColor: Colors.white,
-    backgroundImage: AssetImage('assets/images/san.png'),
-  ),
-),
-                      const SizedBox(height: 30),
-                      // Image.asset('assets/images/san.png', width: 100),
-                      // const SizedBox(height: 5),
-                      // const Text(
-                      //   AppStrings.appName,
-                      //   style: TextStyle(
-                      //     fontSize: 30, fontWeight: FontWeight.w800,
-                      //     color: AppColors.primary, letterSpacing: 2,
-                      //   ),
-                      // ),
-                      // Text(
-                      //   AppStrings.tagline,
-                      //   style: TextStyle(
-                      //     fontSize: 12, color: AppColors.accent,
-                      //     letterSpacing: 1,
-                      //   ),
-                      // ),
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColors.primary,
+                            width: 2,
+                          ),
+                        ),
+                        child: const CircleAvatar(
+                          radius: 38,
+                          backgroundColor: Colors.white,
+                          backgroundImage: AssetImage('assets/images/san.png'),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+
                     ],
                   ),
                 ),
 
-                // const SizedBox(height: 48),
-
-                // const Text(
-                //   'Connexion',
-                //   style: TextStyle(
-                //     fontSize: 24, fontWeight: FontWeight.w800,
-                //     color: AppColors.primary,
-                //   ),
-                // ),
-
-                const SizedBox(height: 38),
+                const SizedBox(height: 48),
 
                 // Champ email
                 _buildTextField(
@@ -163,7 +138,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       v!.contains('@') ? null : 'Email invalide',
                 ),
 
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
 
                 // Champ mot de passe
                 _buildTextField(
@@ -213,7 +188,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                 ],
 
-                const SizedBox(height: 28),
+                const SizedBox(height: 22),
 
                 // Bouton connexion
                 SizedBox(
@@ -239,19 +214,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                   ),
                 ),
-                               Align(
-  alignment: Alignment.centerRight,
-  child: TextButton(
-    onPressed: _resetPassword,
-    child: const Text(
-      'Mot de passe oublié ?',
-      style: TextStyle(color: AppColors.primary),
-    ),
-  ),
-),
+                const SizedBox(height: 14),
+                Align(
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: _resetPassword,
+                    child: const Text(
+                      'Mot de passe oublié ?',
+                      style: TextStyle(color: AppColors.primary),
+                    ),
+                  ),
+                ),
 
 
-                const SizedBox(height: 20),
+                const SizedBox(height: 180),
 
                 // Lien vers l'inscription
                 Center(
@@ -262,14 +238,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           builder: (_) => const RegisterScreen()),
                     ),
                     child: RichText(
-                      text: TextSpan(
+                      text: const TextSpan(
                         text: 'Pas encore de compte ? ',
-                        style: const TextStyle(
+                        style: TextStyle(
                             color: Colors.grey, fontSize: 14),
                         children: [
                           TextSpan(
                             text: 'S\'inscrire',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: AppColors.primary,
                               fontWeight: FontWeight.w700,
                             ),
