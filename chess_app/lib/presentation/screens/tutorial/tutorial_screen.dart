@@ -318,7 +318,7 @@ class TutorialScreen extends ConsumerWidget {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 35),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -332,7 +332,7 @@ class TutorialScreen extends ConsumerWidget {
                 color: AppColors.primary,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 30),
             ...lessons.asMap().entries.map((entry) {
               final lesson = entry.value;
               final isCompleted = completed.contains(lesson.id);

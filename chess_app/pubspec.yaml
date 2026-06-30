@@ -50,8 +50,9 @@ flutter:
     - assets/images/sans.png
     - assets/images/san.png
     - assets/images/icon.png
+    - assets/images/kin.png
 
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/icon.png"
+  image_path: "assets/images/kin.png"

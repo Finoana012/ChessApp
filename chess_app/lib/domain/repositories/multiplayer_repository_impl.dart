@@ -44,6 +44,7 @@ class MultiplayerRepositoryImpl implements IMultiplayerRepository {
     required String roomCode,
     required String fromUid,
     required String fromUsername,
+    required String fromEmail,
     required String toEmail,
   }) async {
     try {
@@ -51,6 +52,7 @@ class MultiplayerRepositoryImpl implements IMultiplayerRepository {
         roomCode: roomCode,
         fromUid: fromUid,
         fromUsername: fromUsername,
+        fromEmail: fromEmail,
         toEmail: toEmail,
       );
       return Right(invitation);

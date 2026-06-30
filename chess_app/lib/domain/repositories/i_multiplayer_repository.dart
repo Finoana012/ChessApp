@@ -19,6 +19,7 @@ abstract class IMultiplayerRepository {
     required String roomCode,
     required String fromUid,
     required String fromUsername,
+    required String fromEmail,
     required String toEmail,
   });
 

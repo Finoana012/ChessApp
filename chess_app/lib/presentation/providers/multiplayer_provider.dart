@@ -89,6 +89,7 @@ class MultiplayerNotifier extends StateNotifier<MultiplayerState> {
   Future<String?> sendInvitation({
     required String fromUid,
     required String fromUsername,
+    required String fromEmail,
     required String toEmail,
   }) async {
     if (state.room == null) return 'Aucune salle créée';
@@ -98,6 +99,7 @@ class MultiplayerNotifier extends StateNotifier<MultiplayerState> {
       roomCode: state.room!.roomCode,
       fromUid: fromUid,
       fromUsername: fromUsername,
+      fromEmail: fromEmail,
       toEmail: toEmail,
     );
 

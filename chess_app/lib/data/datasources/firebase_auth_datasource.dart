@@ -33,10 +33,11 @@ class FirebaseAuthDataSource {
     await user.updateDisplayName(username);
 
     // Création du document Firestore pour ce joueur
+    // On utilise l'email normalisé par Firebase Auth (toujours en minuscules)
     final player = PlayerModel(
       uid: user.uid,
       username: username,
-      email: email,
+      email: user.email!.toLowerCase(),
     );
 
     await _firestore

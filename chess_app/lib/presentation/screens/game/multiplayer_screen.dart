@@ -47,7 +47,7 @@ class _MultiplayerLobbyScreenState
   }
 
   Future<void> _createRoomAndInvite() async {
-    final email = _emailController.text.trim();
+    final email = _emailController.text.trim().toLowerCase();
     if (!_isValidEmail) {
       setState(() => _searchError = 'Entrez un email valide');
       return;
@@ -73,6 +73,15 @@ class _MultiplayerLobbyScreenState
       return;
     }
 
+    // Empêche d'inviter soi-même (comparaison par UID, plus fiable que l'email)
+    if (foundPlayer['uid'] == player.uid) {
+      setState(() {
+        _isSearching = false;
+        _searchError = 'Vous ne pouvez pas vous inviter vous-même';
+      });
+      return;
+    }
+
     final roomCode = await ref
         .read(multiplayerProvider.notifier)
         .createRoom(player.uid, player.username);
@@ -90,6 +99,7 @@ class _MultiplayerLobbyScreenState
     final error = await ref.read(multiplayerProvider.notifier).sendInvitation(
           fromUid: player.uid,
           fromUsername: player.username,
+          fromEmail: player.email,
           toEmail: email,
         );
 

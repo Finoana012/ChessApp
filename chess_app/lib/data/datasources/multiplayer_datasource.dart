@@ -35,9 +35,10 @@ class MultiplayerDataSource {
 
   // Cherche un joueur par email dans la collection players
   Future<Map<String, String>?> searchPlayerByEmail(String email) async {
+    final normalizedEmail = email.toLowerCase();
     final query = await _db
         .collection('players')
-        .where('email', isEqualTo: email)
+        .where('email', isEqualTo: normalizedEmail)
         .limit(1)
         .get();
 
@@ -56,15 +57,25 @@ class MultiplayerDataSource {
     required String roomCode,
     required String fromUid,
     required String fromUsername,
+    required String fromEmail,
     required String toEmail,
   }) async {
+    // Normalisation des emails (insensible à la casse)
+    final normalizedFromEmail = fromEmail.toLowerCase();
+    final normalizedToEmail = toEmail.toLowerCase();
+
+    // Vérification empêchant l'auto-invitation
+    if (normalizedFromEmail == normalizedToEmail) {
+      throw Exception('Vous ne pouvez pas vous inviter vous-même');
+    }
+
     final docRef = _db.collection('invitations').doc();
     final invitation = InvitationModel(
       id: docRef.id,
       roomCode: roomCode,
       fromUid: fromUid,
       fromUsername: fromUsername,
-      toEmail: toEmail,
+      toEmail: normalizedToEmail,
       createdAt: DateTime.now(),
     );
 
@@ -74,9 +85,10 @@ class MultiplayerDataSource {
 
   // Stream temps réel des invitations reçues par un email
   Stream<List<InvitationModel>> watchInvitations(String userEmail) {
+    final normalizedEmail = userEmail.toLowerCase();
     return _db
         .collection('invitations')
-        .where('toEmail', isEqualTo: userEmail)
+        .where('toEmail', isEqualTo: normalizedEmail)
         .where('status', isEqualTo: 'pending')
         .snapshots()
         .map((snapshot) => snapshot.docs

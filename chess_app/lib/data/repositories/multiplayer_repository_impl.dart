@@ -49,6 +49,7 @@ Stream<String> watchInvitationStatus(String invitationId) {
     required String roomCode,
     required String fromUid,
     required String fromUsername,
+    required String fromEmail,
     required String toEmail,
   }) async {
     try {
@@ -56,6 +57,7 @@ Stream<String> watchInvitationStatus(String invitationId) {
         roomCode: roomCode,
         fromUid: fromUid,
         fromUsername: fromUsername,
+        fromEmail: fromEmail,
         toEmail: toEmail,
       );
       return Right(invitation);

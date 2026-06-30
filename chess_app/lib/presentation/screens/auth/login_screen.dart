@@ -126,7 +126,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 48),
+                const SizedBox(height: 58),
 
                 // Champ email
                 _buildTextField(
@@ -227,7 +227,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 ),
 
 
-                const SizedBox(height: 180),
+                const SizedBox(height: 200),
 
                 // Lien vers l'inscription
                 Center(
