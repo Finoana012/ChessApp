@@ -41,6 +41,7 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   build_runner: ^2.4.9
   riverpod_generator: ^2.3.11
+  flutter_launcher_icons: ^0.14.3
 
 flutter:
   uses-material-design: true
@@ -48,3 +49,9 @@ flutter:
     - assets/images/chess_club.png
     - assets/images/sans.png
     - assets/images/san.png
+    - assets/images/icon.png
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
